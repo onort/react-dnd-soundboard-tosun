@@ -1,0 +1,7 @@
+.queueItem {
+  border: 1px dashed blue;
+}
+
+.dragging {
+  opacity: 0;
+}
