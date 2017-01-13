@@ -1,5 +1,6 @@
 .library {
-  height: 400px;
-  width: 200px;
+  min-height: 400px;
+  height: 100%;
+  /*width: 200px;*/
   border: 1px dashed red;
 }

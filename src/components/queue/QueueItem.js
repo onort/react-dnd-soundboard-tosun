@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, react/jsx-no-bind */
 
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
@@ -7,13 +7,20 @@ import flow from 'lodash/flow';
 import './QueueItem.css';
 
 class QueueItem extends Component {
+	handleClick() {
+    this._audioTag.currentTime = 0.0;
+    this._audioTag.play();
+  }
+
   render() {
     const { item, isDragging, connectDragSource, connectDropTarget } = this.props;
-    let classes = isDragging ? 'clip queueItem dragging' : 'clip queueItem';
+    let classes = isDragging ? 'clip queueItem dragging' : 'clip queueItem'; 
+		const src = `/audio/${item.src}`;
 
     return connectDragSource(connectDropTarget(
-      <div className={classes}>
+			<div className={classes} onClick={this.handleClick.bind(this)}>
         {item.name}
+				<audio src={src} ref={(tag) => { this._audioTag = tag; }} />
       </div>
     ));
   }
@@ -42,13 +49,6 @@ const qItemTarget = {
 		const dragIndex = monitor.getItem().index;
 		const hoverIndex = props.index;
 		const sourceListName = monitor.getItem().listName;
-
-    console.log('qItemTarget reports dragIndex', dragIndex);
-    console.log('qItemTarget reports hoverIndex', hoverIndex);
-    console.log('qItemTarget reports sourceListName', sourceListName);
-    console.log('qItemTarget reports props', props);
-    console.log('qItemTarget reports monitor', monitor);
-    console.log('qItemTarget reports component', component);
 
     // Don't replace items with themselves
 		if (dragIndex === hoverIndex) {

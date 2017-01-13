@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, react/jsx-no-bind */
 
 import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
@@ -7,12 +7,19 @@ import './Clip.css';
 
 
 class Clip extends Component {
+  handleClick() {
+    this._audioTag.currentTime = 0.0;
+    this._audioTag.play();
+  }
+
   render() {
     const { clip, isDragging, connectDragSource } = this.props;
-    
+    const src = `/audio/${clip.src}`;
+
     return connectDragSource(
-      <div className="clip">
+      <div className="clip" onClick={this.handleClick.bind(this)}>
         {clip.name}
+        <audio src={src} ref={(tag) => { this._audioTag = tag; }} />
       </div>
     );
   }
@@ -28,8 +35,6 @@ Clip.propTypes = {
 const cardSource = {
  
 	beginDrag(props) {
-    // try props alone
-    console.log('Beginnig Dragging');	
 		return {			
 			clip: props.clip,
       listName: props.listName
@@ -37,12 +42,9 @@ const cardSource = {
 	},
 
   endDrag(props, monitor) {
-    // console.log('Ending Dragging. Logging props: ', props);
-    console.log('Ending Dragging. Logging monitor', monitor);
+
 		const item = monitor.getItem();
 		const dropResult = monitor.getDropResult();	
-    // console.log('Item', item);
-    console.log('Drop Result', dropResult);
 		// if ( dropResult && dropResult.listId !== item.listId ) {
 		// 	// props.removeCard(item.index);
 		// }

@@ -54,7 +54,6 @@ class Queue extends Component {
     return connectDropTarget(
       <div className="queue">
       {items.map((item, i) => {
-        console.log('Rendering item', item);
         return item ?  (
           <QueueItem key={item.id} index={i} listName={this.props.name} item={item}
             removeItem={this.removeItem}
