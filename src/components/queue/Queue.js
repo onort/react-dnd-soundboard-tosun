@@ -6,6 +6,8 @@ import { DropTarget } from 'react-dnd';
 import QueueItem from './QueueItem';
 import './Queue.css';
 
+import { ListGroup, ListGroupItem, Panel } from 'react-bootstrap';
+
 class Queue extends Component {
   constructor(props) {
     super(props);
@@ -52,15 +54,21 @@ class Queue extends Component {
     const { canDrop, isOver, connectDropTarget } = this.props;
     
     return connectDropTarget(
-      <div className="queue">
-      {items.map((item, i) => {
-        return item ?  (
-          <QueueItem key={item.id} index={i} listName={this.props.name} item={item}
-            removeItem={this.removeItem}
-            moveItem={this.moveItem}
-            pushItem={this.pushItem} /> 
-        ): null;
-      })}
+      <div>
+        <Panel className="queue">   
+          <ListGroup>
+          {items.map((item, i) => {
+            return item ?  (
+              <ListGroupItem className="queueItem" key={item.id}>
+              <QueueItem index={i} listName={this.props.name} item={item}
+                removeItem={this.removeItem}
+                moveItem={this.moveItem}
+                pushItem={this.pushItem} /> 
+              </ListGroupItem>
+            ): null;
+          })}
+          </ListGroup>
+        </Panel>
       </div>
       );
   }

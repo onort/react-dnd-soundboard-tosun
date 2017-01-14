@@ -1,0 +1,17 @@
+.personDiv {
+  cursor: pointer;
+}
+
+.personImage {
+  display: inline-block;
+  padding: 10px 15px;
+}
+
+.personName {
+  font-size: 1.5em;
+}
+
+.personClip {
+  margin: 5px 0;
+  cursor: move;
+}

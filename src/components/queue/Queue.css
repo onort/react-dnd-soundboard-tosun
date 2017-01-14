@@ -1,6 +1,11 @@
 .queue {
-  min-height: 400px;
   height: 100%;
-  /*width: 200px;*/
-  border: 1px dashed green;
+  width: 100%;
+  min-height: 400px;
+  background: #e4efe1;
+}
+
+.queueItem {
+  margin: 5px 0;
+  cursor: move;
 }

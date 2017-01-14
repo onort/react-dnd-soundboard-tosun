@@ -6,20 +6,29 @@ import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import './QueueItem.css';
 
+import { Button, Glyphicon } from 'react-bootstrap';
+
 class QueueItem extends Component {
 	handleClick() {
     this._audioTag.currentTime = 0.0;
-    this._audioTag.play();
+    this._audioTag.play().catch(err => console.log('Catched in handleClick', err));
   }
 
+	handleRemove() {
+		this._audioTag.pause();
+		this._audioTag.currentTime = 0.0;
+		this.props.removeItem(this.props.index);
+	}
+
   render() {
-    const { item, isDragging, connectDragSource, connectDropTarget } = this.props;
+    const { item, isDragging, connectDragSource, connectDropTarget, removeItem } = this.props;
     let classes = isDragging ? 'clip queueItem dragging' : 'clip queueItem'; 
 		const src = `/audio/${item.src}`;
 
     return connectDragSource(connectDropTarget(
 			<div className={classes} onClick={this.handleClick.bind(this)}>
         {item.name}
+				<Glyphicon className="pull-right removeItem" glyph="remove" onClick={this.handleRemove.bind(this)}/>
 				<audio src={src} ref={(tag) => { this._audioTag = tag; }} />
       </div>
     ));
@@ -29,8 +38,10 @@ class QueueItem extends Component {
 QueueItem.propTypes = {
 	connectDragSource: PropTypes.func.isRequired,
 	connectDropTarget: PropTypes.func.isRequired,
+	index: PropTypes.number.isRequired,
 	item: PropTypes.object.isRequired,
 	isDragging: PropTypes.bool.isRequired,
+	removeItem: PropTypes.func.isRequired
 };
 
 const qItemSource = {

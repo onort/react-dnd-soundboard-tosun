@@ -1,7 +1,9 @@
-.queueItem {
-  border: 1px dashed blue;
-}
-
 .dragging {
   opacity: 0;
+}
+
+.removeItem {
+  padding: 0 10px;
+  color: red;
+  cursor: default;
 }

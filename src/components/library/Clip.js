@@ -17,7 +17,7 @@ class Clip extends Component {
     const src = `/audio/${clip.src}`;
 
     return connectDragSource(
-      <div className="clip" onClick={this.handleClick.bind(this)}>
+      <div onClick={this.handleClick.bind(this)}>
         {clip.name}
         <audio src={src} ref={(tag) => { this._audioTag = tag; }} />
       </div>
