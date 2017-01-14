@@ -43,7 +43,6 @@ class Person extends Component {
 }
 
 Person.propTypes = {
-  name: PropTypes.string.isRequired,
   person: PropTypes.object.isRequired
 };
 

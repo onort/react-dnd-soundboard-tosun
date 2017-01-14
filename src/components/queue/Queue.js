@@ -3,6 +3,8 @@
 import React, { Component, PropTypes } from 'react';
 import update from 'react/lib/update';
 import { DropTarget } from 'react-dnd';
+
+import Menu from './Menu';
 import QueueItem from './QueueItem';
 import './Queue.css';
 
@@ -55,7 +57,8 @@ class Queue extends Component {
     
     return connectDropTarget(
       <div>
-        <Panel className="queue">   
+        <Panel className="queue"> 
+        <Menu />  
           <ListGroup>
           {items.map((item, i) => {
             return item ?  (
