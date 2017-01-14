@@ -6,7 +6,7 @@ import { DragSource, DropTarget } from 'react-dnd';
 import flow from 'lodash/flow';
 import './QueueItem.css';
 
-import { Button, Glyphicon } from 'react-bootstrap';
+import { Button, Glyphicon, ListGroupItem } from 'react-bootstrap';
 
 class QueueItem extends Component {
 	handleClick() {
@@ -26,11 +26,13 @@ class QueueItem extends Component {
 		const src = `/audio/${item.src}`;
 
     return connectDragSource(connectDropTarget(
-			<div className={classes} onClick={this.handleClick.bind(this)}>
+			<div>
+			<ListGroupItem className={classes} onClick={this.handleClick.bind(this)} >
         {item.name}
 				<Glyphicon className="pull-right removeItem" glyph="remove" onClick={this.handleRemove.bind(this)}/>
 				<audio src={src} ref={(tag) => { this._audioTag = tag; }} />
-      </div>
+			</ListGroupItem>
+			</div>
     ));
   }
 }

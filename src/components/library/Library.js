@@ -2,13 +2,16 @@ import React, { Component, PropTypes } from 'react';
 import Person from './Person';
 import './Library.css';
 
+import LibraryMenu from './LibraryMenu';
+
 import { Panel } from 'react-bootstrap';
 
 const Library = (props) => {
-  const { clips, persons } = props;
+  const { clips, persons, name } = props;
   return (
     <Panel className="library">
-      { persons.map(person => <Person key={person.id} person={person}/>)}
+    <LibraryMenu />
+      { persons.map(person => <Person key={person.id} person={person} name={name}/>)}
     </Panel>
   );
 };

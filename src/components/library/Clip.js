@@ -5,6 +5,7 @@ import { findDOMNode } from 'react-dom';
 import { DragSource } from 'react-dnd';
 import './Clip.css';
 
+import { ListGroupItem } from 'react-bootstrap';
 
 class Clip extends Component {
   handleClick() {
@@ -18,7 +19,9 @@ class Clip extends Component {
 
     return connectDragSource(
       <div onClick={this.handleClick.bind(this)}>
-        {clip.name}
+        <ListGroupItem className="personClip">
+          {clip.name}
+        </ListGroupItem>
         <audio src={src} ref={(tag) => { this._audioTag = tag; }} />
       </div>
     );

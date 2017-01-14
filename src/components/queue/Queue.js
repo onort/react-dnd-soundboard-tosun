@@ -4,16 +4,17 @@ import React, { Component, PropTypes } from 'react';
 import update from 'react/lib/update';
 import { DropTarget } from 'react-dnd';
 
-import Menu from './Menu';
+import QueueMenu from './QueueMenu';
 import QueueItem from './QueueItem';
 import './Queue.css';
 
-import { ListGroup, ListGroupItem, Panel } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Panel, Well } from 'react-bootstrap';
 
 class Queue extends Component {
   constructor(props) {
     super(props);
     this.state = { items: props.items };
+    this.clearQueue = this.clearQueue.bind(this);
     this.moveItem = this.moveItem.bind(this);
     this.pushItem = this.pushItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
@@ -51,6 +52,10 @@ class Queue extends Component {
     }));
   }
 
+  clearQueue() {
+    this.setState({ items: [] });
+  }
+
   render() {
     const { items } = this.state;
     const { canDrop, isOver, connectDropTarget } = this.props;
@@ -58,19 +63,18 @@ class Queue extends Component {
     return connectDropTarget(
       <div>
         <Panel className="queue"> 
-        <Menu />  
+        <QueueMenu clearQueue={this.clearQueue} />  
           <ListGroup>
           {items.map((item, i) => {
             return item ?  (
-              <ListGroupItem className="queueItem" key={item.id}>
-              <QueueItem index={i} listName={this.props.name} item={item}
+              <QueueItem key={item.id} index={i} listName={this.props.name} item={item}
                 removeItem={this.removeItem}
                 moveItem={this.moveItem}
                 pushItem={this.pushItem} /> 
-              </ListGroupItem>
             ): null;
           })}
           </ListGroup>
+          {items.length == 0 ? <Well className="noQueueItem">Drag Clips Here</Well> : null}
         </Panel>
       </div>
       );

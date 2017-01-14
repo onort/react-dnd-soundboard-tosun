@@ -30,9 +30,7 @@ class Person extends Component {
           <div>
             {person.clips.map(clip => {
               return (
-                <ListGroupItem key={clip.id} className="personClip">
-                  <Clip clip={clip} listName={this.props.name} />
-                </ListGroupItem>
+                <Clip key={clip.id} clip={clip} listName={this.props.name} />
               );
             })}
           </div>
@@ -43,6 +41,7 @@ class Person extends Component {
 }
 
 Person.propTypes = {
+  name: PropTypes.string.isRequired,
   person: PropTypes.object.isRequired
 };
 
