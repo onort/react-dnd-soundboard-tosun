@@ -15,9 +15,10 @@ class QueueItem extends Component {
   }
 
 	handleRemove() {
+		const { index, removeItem} = this.props;
 		this._audioTag.pause();
 		this._audioTag.currentTime = 0.0;
-		this.props.removeItem(this.props.index);
+		removeItem(index);
 	}
 
   render() {

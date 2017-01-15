@@ -14,7 +14,7 @@ class LibraryMenu extends Component {
     return (
       <div className="libraryMenu">
         <ButtonGroup className="pull-right">
-          <Button disabled><Glyphicon glyph="random" /></Button>
+          <Button onClick={this.props.createRandomQueue}><Glyphicon glyph="random" /></Button>
           <Button disabled><Glyphicon glyph="share" /></Button>
         </ButtonGroup>
       </div>
@@ -22,7 +22,9 @@ class LibraryMenu extends Component {
   }
 }
 
-export default LibraryMenu;
+LibraryMenu.propTypes = {
+  createRandomQueue: PropTypes.func.isRequired
+};
 
-// play, pause, stop, random, remove-sign, share
+export default LibraryMenu;
 

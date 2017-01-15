@@ -32,6 +32,10 @@ class Queue extends Component {
     this._next = this._next.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({ items: nextProps.items });
+  }
+
   pushItem(clip) {
     this.setState(update(this.state, {
       items: {
@@ -41,6 +45,7 @@ class Queue extends Component {
   }
 
   removeItem(index) {
+    this.setState({ current: 0, playing: false });
     this.setState(update(this.state, {
       items: {
         $splice: [

@@ -7,17 +7,18 @@ import LibraryMenu from './LibraryMenu';
 import { Panel } from 'react-bootstrap';
 
 const Library = (props) => {
-  const { clips, persons, name } = props;
+  const { createRandomQueue, name, persons } = props;
+
   return (
     <Panel className="library">
-    <LibraryMenu />
+    <LibraryMenu createRandomQueue={createRandomQueue} />
       { persons.map(person => <Person key={person.id} person={person} name={name}/>)}
     </Panel>
   );
 };
 
 Library.propTypes = {
-  clips: PropTypes.array.isRequired,
+  createRandomQueue : PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   persons: PropTypes.array.isRequired
 };
