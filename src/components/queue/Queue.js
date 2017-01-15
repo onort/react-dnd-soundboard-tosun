@@ -13,11 +13,23 @@ import { ListGroup, ListGroupItem, Panel, Well } from 'react-bootstrap';
 class Queue extends Component {
   constructor(props) {
     super(props);
-    this.state = { items: props.items };
+    this.state = { 
+      playing: false,
+      current: 0,
+      items: props.items, 
+      repeat: false
+    };
+    this.audio;
+
     this.clearQueue = this.clearQueue.bind(this);
     this.moveItem = this.moveItem.bind(this);
+    this.pause = this.pause.bind(this);
+    this.play = this.play.bind(this);
     this.pushItem = this.pushItem.bind(this);
     this.removeItem = this.removeItem.bind(this);
+    this.stop = this.stop.bind(this);
+    this.toggleRepeat = this.toggleRepeat.bind(this);
+    this._next = this._next.bind(this);
   }
 
   pushItem(clip) {
@@ -56,6 +68,43 @@ class Queue extends Component {
     this.setState({ items: [] });
   }
 
+  play() {
+    const { items, current, repeat } = this.state;
+    if ( current < items.length ) {
+      this.audio = new Audio(`/audio/${items[current].src}`);
+      this.audio.addEventListener('ended', this._next);
+      this.setState({ playing: true });
+      this.audio.play();
+    } else if ( current == items.length && repeat ) {
+      this.setState({ current: 0 });
+      this.play();
+    } else {
+      console.log('No item to play, perhaps show an alert?');
+      this.setState({ playing: false, current: 0 });
+    }
+  }
+
+  _next() {
+    const current = this.state.current + 1;
+    this.setState({ current });
+    this.play();
+  }
+
+  pause() {
+    this.audio.pause();
+    this.setState({ playing: false });
+  }
+
+  stop() {
+    this.audio.pause();
+    this.audio.currentTime = 0.0;
+    this.setState({ playing: false, current: 0 });
+  }
+
+  toggleRepeat() {
+    this.setState({ repeat: !this.state.repeat });
+  }
+
   render() {
     const { items } = this.state;
     const { canDrop, isOver, connectDropTarget } = this.props;
@@ -63,7 +112,14 @@ class Queue extends Component {
     return connectDropTarget(
       <div>
         <Panel className="queue"> 
-        <QueueMenu clearQueue={this.clearQueue} />  
+        <QueueMenu 
+          play={this.play}
+          playing={this.state.playing}
+          pause={this.pause}
+          stop={this.stop}
+          clearQueue={this.clearQueue} 
+          toggleRepeat={this.toggleRepeat} 
+          repeat={this.state.repeat} />  
           <ListGroup>
           {items.map((item, i) => {
             return item ?  (
@@ -110,7 +166,3 @@ function collect(connect, monitor) {
 }
 
 export default DropTarget('CLIP', itemTarget, collect)(Queue);
-
-// TODOS:
-// Check "ITEM" const 
-// Check sourceObj in const itemTarget

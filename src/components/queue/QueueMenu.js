@@ -6,34 +6,29 @@ import { Button, ButtonGroup, ButtonToolbar, Glyphicon, OverlayTrigger, Tooltip 
 class QueueMenu extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      playing: false
-    };
-    this.togglePlay = this.togglePlay.bind(this);
   }
 
-  togglePlay() {
-    this.setState({ playing: !this.state.playing });
-  }
 
   render() {
     const resetTooltip = <Tooltip id="reset">Reset</Tooltip>;
     const repeatTooltip = <Tooltip id="repeat">Repeat</Tooltip>;
+    const { clearQueue, pause, play, playing, repeat, toggleRepeat, stop } = this.props;
+    const repeatClass = repeat ? '' : 'faded';
 
     return (
       <div className="queueMenu">
         <ButtonGroup>
-          { this.state.playing ? 
-            <Button onClick={this.togglePlay}><Glyphicon glyph="pause" /></Button> :
-            <Button onClick={this.togglePlay}><Glyphicon glyph="play" /></Button> }
-          <Button disabled><Glyphicon glyph="stop" /></Button>
+          { playing ? 
+            <Button onClick={pause}><Glyphicon glyph="pause" /></Button> :
+            <Button onClick={play}><Glyphicon glyph="play" /></Button> }
+          <Button onClick={stop}><Glyphicon className={playing ? '': 'faded'} glyph="stop" /></Button>
           <OverlayTrigger placement="bottom" overlay={repeatTooltip}>
-            <Button><Glyphicon glyph="retweet" /></Button>
+            <Button onClick={toggleRepeat}><Glyphicon className={repeatClass} glyph="retweet" /></Button>
           </OverlayTrigger>
         </ButtonGroup>
         <ButtonGroup className="pull-right">
         <OverlayTrigger placement="bottom" overlay={resetTooltip}>
-          <Button onClick={this.props.clearQueue}><Glyphicon glyph="repeat" /></Button>
+          <Button onClick={clearQueue}><Glyphicon glyph="repeat" /></Button>
         </OverlayTrigger>
         </ButtonGroup>
       </div>
@@ -41,8 +36,14 @@ class QueueMenu extends Component {
   }
 }
 
-QueueMenu.PropTypes = {
-  clearQueue: PropTypes.func.isRequired
+QueueMenu.propTypes = {
+  clearQueue: PropTypes.func.isRequired,
+  pause: PropTypes.func.isRequired,
+  play: PropTypes.func.isRequired,
+  playing: PropTypes.bool.isRequired,
+  repeat: PropTypes.bool.isRequired,
+  stop: PropTypes.func.isRequired,
+  toggleRepeat: PropTypes.func.isRequired
 };
 
 export default QueueMenu;
