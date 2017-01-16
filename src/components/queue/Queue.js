@@ -22,6 +22,7 @@ class Queue extends Component {
     this.audio;
 
     this.clearQueue = this.clearQueue.bind(this);
+    this.createRandomQueue = this.createRandomQueue.bind(this);
     this.moveItem = this.moveItem.bind(this);
     this.pause = this.pause.bind(this);
     this.play = this.play.bind(this);
@@ -32,8 +33,19 @@ class Queue extends Component {
     this._next = this._next.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ items: nextProps.items });
+  createRandomQueue() {
+    // TODO: optimize this
+    const allClips = []; 
+    const items = [];
+    const persons = this.props.persons;
+    persons.forEach(person => person.clips.forEach(clip => allClips.push(clip)));
+    while(items.length < 10) {
+      const randomIndex = Math.floor(Math.random() * allClips.length);
+      const itemToPush = allClips[randomIndex];
+      if (items.includes(itemToPush)) continue;
+      items.push(itemToPush);
+    }
+    this.setState({ items, current: 0, playing: false });
   }
 
   pushItem(clip) {
@@ -74,8 +86,8 @@ class Queue extends Component {
   }
 
   play() {
-    const { items, current, repeat } = this.state;
-    if ( current < items.length ) {
+    const { items, current, playing, repeat } = this.state;
+    if ( current < items.length) {
       this.audio = new Audio(`/audio/${items[current].src}`);
       this.audio.addEventListener('ended', this._next);
       this.setState({ playing: true });
@@ -111,24 +123,25 @@ class Queue extends Component {
   }
 
   render() {
-    const { items } = this.state;
-    const { canDrop, isOver, connectDropTarget } = this.props;
+    const { items, playing, repeat } = this.state;
+    const { canDrop, isOver, connectDropTarget, name } = this.props;
     
     return connectDropTarget(
       <div>
         <Panel className="queue"> 
         <QueueMenu 
           play={this.play}
-          playing={this.state.playing}
+          playing={playing}
           pause={this.pause}
           stop={this.stop}
           clearQueue={this.clearQueue} 
           toggleRepeat={this.toggleRepeat} 
-          repeat={this.state.repeat} />  
+          repeat={repeat}
+          createRandomQueue={this.createRandomQueue} />
           <ListGroup>
           {items.map((item, i) => {
             return item ?  (
-              <QueueItem key={item.id} index={i} listName={this.props.name} item={item}
+              <QueueItem key={item.id.concat(i)} index={i} listName={name} item={item}
                 removeItem={this.removeItem}
                 moveItem={this.moveItem}
                 pushItem={this.pushItem} /> 
@@ -148,6 +161,7 @@ Queue.propTypes = {
   isOver: PropTypes.bool.isRequired,
   items: PropTypes.array,
   name: PropTypes.string.isRequired,
+  persons: PropTypes.array.isRequired
 };
 
 const itemTarget = {
@@ -166,7 +180,7 @@ function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
-    canDrop: monitor.canDrop()  
+    canDrop: monitor.canDrop(),
   };
 }
 

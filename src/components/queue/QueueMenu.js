@@ -10,9 +10,10 @@ class QueueMenu extends Component {
 
 
   render() {
-    const resetTooltip = <Tooltip id="reset">Reset</Tooltip>;
+    const randomQueueToolTip = <Tooltip id="random">Create Random</Tooltip>;
     const repeatTooltip = <Tooltip id="repeat">Repeat</Tooltip>;
-    const { clearQueue, pause, play, playing, repeat, toggleRepeat, stop } = this.props;
+    const resetTooltip = <Tooltip id="reset">Reset</Tooltip>;
+    const { clearQueue, createRandomQueue, pause, play, playing, repeat, toggleRepeat, stop } = this.props;
     const repeatClass = repeat ? '' : 'faded';
 
     return (
@@ -27,6 +28,9 @@ class QueueMenu extends Component {
           </OverlayTrigger>
         </ButtonGroup>
         <ButtonGroup className="pull-right">
+        <OverlayTrigger placement="bottom" overlay={randomQueueToolTip}>
+          <Button onClick={createRandomQueue}><Glyphicon glyph="random" /></Button>
+        </OverlayTrigger>
         <OverlayTrigger placement="bottom" overlay={resetTooltip}>
           <Button onClick={clearQueue}><Glyphicon glyph="repeat" /></Button>
         </OverlayTrigger>
