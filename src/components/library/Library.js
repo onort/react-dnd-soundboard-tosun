@@ -4,15 +4,23 @@ import './Library.css';
 
 import LibraryMenu from './LibraryMenu';
 
-import { Panel } from 'react-bootstrap';
+import { Panel, Row, Col } from 'react-bootstrap';
 
 const Library = (props) => {
   const { name, persons } = props;
-
+  // TODO: Remove LibraryMenu component
   return (
     <Panel className="library">
-    <LibraryMenu />
-      { persons.map(person => <Person key={person.id} person={person} name={name}/>)}
+    <Row>
+      { persons.map(person => {
+        return (
+          <Col xs={12} sm={6} key={person.id}>
+            <Person key={person.id} person={person} name={name} />
+          </Col>
+        );
+      })
+    }
+    </Row>
     </Panel>
   );
 };

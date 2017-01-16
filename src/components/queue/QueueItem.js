@@ -9,6 +9,14 @@ import './QueueItem.css';
 import { Button, Glyphicon, ListGroupItem } from 'react-bootstrap';
 
 class QueueItem extends Component {
+	constructor(props) {
+		super(props);
+		this.state = { mouseEntered: false };
+		// TODO: Show close glyph on mouse enter
+		this.handleClick = this.handleClick.bind(this);
+		this.handleRemove = this.handleRemove.bind(this);
+	}
+
 	handleClick() {
     this._audioTag.currentTime = 0.0;
     this._audioTag.play().catch(err => console.log('Catched in handleClick', err));
@@ -22,15 +30,18 @@ class QueueItem extends Component {
 	}
 
   render() {
-    const { item, isDragging, connectDragSource, connectDropTarget, removeItem } = this.props;
+    const { active, item, isDragging, connectDragSource, connectDropTarget, playing, removeItem } = this.props;
     let classes = isDragging ? 'clip queueItem dragging' : 'clip queueItem'; 
+		classes = active ? classes + ' playing' : classes;
 		const src = `/audio/${item.src}`;
 
     return connectDragSource(connectDropTarget(
 			<div>
-			<ListGroupItem className={classes} onClick={this.handleClick.bind(this)} >
+			<ListGroupItem className={classes} onClick={this.handleClick} >
         {item.name}
-				<Glyphicon className="pull-right removeItem" glyph="remove" onClick={this.handleRemove.bind(this)}/>
+				{playing ? 
+					null : 
+					<Glyphicon className="pull-right removeItem" glyph="remove" onClick={this.handleRemove}/>}
 				<audio src={src} ref={(tag) => { this._audioTag = tag; }} />
 			</ListGroupItem>
 			</div>
@@ -39,11 +50,13 @@ class QueueItem extends Component {
 }
 
 QueueItem.propTypes = {
+	active: PropTypes.bool.isRequired,
 	connectDragSource: PropTypes.func.isRequired,
 	connectDropTarget: PropTypes.func.isRequired,
 	index: PropTypes.number.isRequired,
 	item: PropTypes.object.isRequired,
 	isDragging: PropTypes.bool.isRequired,
+	playing: PropTypes.bool.isRequired,
 	removeItem: PropTypes.func.isRequired
 };
 

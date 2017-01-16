@@ -42,6 +42,7 @@ class QueueMenu extends Component {
 
 QueueMenu.propTypes = {
   clearQueue: PropTypes.func.isRequired,
+  createRandomQueue: PropTypes.func.isRequired,
   pause: PropTypes.func.isRequired,
   play: PropTypes.func.isRequired,
   playing: PropTypes.bool.isRequired,

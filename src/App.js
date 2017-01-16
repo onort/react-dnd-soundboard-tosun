@@ -25,10 +25,10 @@ class App extends Component {
     return (
       <Grid fluid>
         <Row>
-          <Col xs={6} md={4} mdOffset={1} >
+          <Col xs={6} sm={4} >
             <Queue name="Queue" items={items} persons={persons} />
           </Col>
-          <Col xs={6} md={4} mdOffset={2} >
+          <Col xs={6} sm={8} >
             <Library name="Library" persons={persons} />
           </Col>
         </Row>

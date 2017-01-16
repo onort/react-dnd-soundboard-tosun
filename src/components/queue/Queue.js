@@ -49,11 +49,13 @@ class Queue extends Component {
   }
 
   pushItem(clip) {
-    this.setState(update(this.state, {
-      items: {
-        $push: [ clip ]
-      }
-    }));
+    if (clip) {
+      this.setState(update(this.state, {
+        items: {
+          $push: [ clip ]
+        }
+      }));
+    }
   }
 
   removeItem(index) {
@@ -123,11 +125,11 @@ class Queue extends Component {
   }
 
   render() {
-    const { items, playing, repeat } = this.state;
+    const { items, playing, repeat, current } = this.state;
     const { canDrop, isOver, connectDropTarget, name } = this.props;
     
     return connectDropTarget(
-      <div>
+      <div className="rtl">
         <Panel className="queue"> 
         <QueueMenu 
           play={this.play}
@@ -144,7 +146,9 @@ class Queue extends Component {
               <QueueItem key={item.id.concat(i)} index={i} listName={name} item={item}
                 removeItem={this.removeItem}
                 moveItem={this.moveItem}
-                pushItem={this.pushItem} /> 
+                pushItem={this.pushItem}
+                playing={playing}
+                active={playing && current === i ? true : false} /> 
             ): null;
           })}
           </ListGroup>

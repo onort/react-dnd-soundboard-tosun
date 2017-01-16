@@ -4,6 +4,21 @@
 
 .removeItem {
   padding: 0 10px;
-  color: red;
+  color: #c93932;
+  font-size: .8em;
   cursor: default;
+}
+
+.queueItem {
+  margin: 5px 0;
+  cursor: move;
+}
+
+.playing {
+  background: #cbdbcd;
+  transform: scale(1.05);
+  margin: 10px 0 !important;
+  font-size: 110%;
+  font-weight: 700;
+  transition: all .25s ease-in-out;
 }

@@ -1,3 +1,23 @@
 button:focus, .btn:focus {
   outline:0;
 }
+
+/*https://css-tricks.com/almanac/properties/s/scrollbar/*/
+.library .col-sm-6:nth-child(2n+1) {
+  clear: left;
+}
+
+.library::-webkit-scrollbar,
+.rtl::-webkit-scrollbar {
+    width: .5em;
+}
+ 
+.library::-webkit-scrollbar-track,
+.rtl::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.2);
+}
+ 
+.library::-webkit-scrollbar-thumb,
+.rtl::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+}

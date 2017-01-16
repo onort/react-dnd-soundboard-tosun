@@ -1,12 +1,13 @@
-.queue {
-  height: 100%;
-  width: 100%;
-  min-height: 400px;
+.rtl {
+  direction: rtl;
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
-.queueItem {
-  margin: 5px 0;
-  cursor: move;
+.queue {
+  direction: ltr;
+  width: 100%;
+  min-height: 400px;
 }
 
 .noQueueItem {
