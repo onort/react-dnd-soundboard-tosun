@@ -1,3 +1,24 @@
+/*Color Palette
+
+body-bg: #876D6A
+panel-bg: #909483
+item-bg: #D2D6CB
+item-bg-hover: #F3F7EF
+item-border: #747669
+body-clr: #555 / #201C1B
+person-hover: #A6AA9B
+scroll-bar: #4A4942
+*/
+
+body {
+  background-color: #876D6A;
+  color: #555;
+}
+
+h1, h2, h3 {
+  color: #201C1B
+}
+
 button:focus, .btn:focus {
   outline:0;
 }
@@ -19,5 +40,5 @@ button:focus, .btn:focus {
  
 .library::-webkit-scrollbar-thumb,
 .rtl::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
+  background-color: #4A4942;
 }

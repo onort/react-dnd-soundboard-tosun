@@ -5,20 +5,26 @@
 .removeItem {
   padding: 0 10px;
   color: #c93932;
-  font-size: .8em;
   cursor: default;
 }
 
 .queueItem {
   margin: 5px 0;
   cursor: move;
+  border: 1px solid #747669
 }
 
 .playing {
-  background: #cbdbcd;
+  /*margin: 10px 0 !important;*/
   transform: scale(1.05);
-  margin: 10px 0 !important;
-  font-size: 110%;
-  font-weight: 700;
-  transition: all .25s ease-in-out;
+  transition: all .3s ease-in;
+  animation-name: changeBg;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes changeBg {
+  from { background: #F3F7EF }
+  to { background: #BCC0B3}
 }

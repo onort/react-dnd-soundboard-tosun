@@ -14,7 +14,7 @@ const Library = (props) => {
     <Row>
       { persons.map(person => {
         return (
-          <Col xs={12} sm={6} key={person.id}>
+          <Col xs={12} key={person.id} className="personCol">
             <Person key={person.id} person={person} name={name} />
           </Col>
         );

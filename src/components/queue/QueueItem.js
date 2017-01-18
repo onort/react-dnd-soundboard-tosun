@@ -11,8 +11,6 @@ import { Button, Glyphicon, ListGroupItem } from 'react-bootstrap';
 class QueueItem extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { mouseEntered: false };
-		// TODO: Show close glyph on mouse enter
 		this.handleClick = this.handleClick.bind(this);
 		this.handleRemove = this.handleRemove.bind(this);
 	}
@@ -34,14 +32,15 @@ class QueueItem extends Component {
     let classes = isDragging ? 'clip queueItem dragging' : 'clip queueItem'; 
 		classes = active ? classes + ' playing' : classes;
 		const src = `/audio/${item.src}`;
-
+		// <Glyphicon className="pull-right removeItem" glyph="remove" onClick={this.handleRemove}/>
     return connectDragSource(connectDropTarget(
 			<div>
 			<ListGroupItem className={classes} onClick={this.handleClick} >
         {item.name}
 				{playing ? 
 					null : 
-					<Glyphicon className="pull-right removeItem" glyph="remove" onClick={this.handleRemove}/>}
+					<span className="pull-right removeItem" onClick={this.handleRemove}>X</span>
+					}
 				<audio src={src} ref={(tag) => { this._audioTag = tag; }} />
 			</ListGroupItem>
 			</div>

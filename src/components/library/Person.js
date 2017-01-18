@@ -22,7 +22,7 @@ class Person extends Component {
     const imageSrc = `/images/${person.img}`;
     return (
       <ListGroup>
-        <div onClick={this.togglePerson} className="personDiv">
+        <div onClick={this.togglePerson} className="personHeader">
           <Image src={imageSrc} className="personImage" circle responsive/>
           <span className="personName">{person.name}</span>
         </div>

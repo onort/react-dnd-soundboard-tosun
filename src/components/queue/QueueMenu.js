@@ -13,15 +13,15 @@ class QueueMenu extends Component {
     const randomQueueToolTip = <Tooltip id="random">Create Random</Tooltip>;
     const repeatTooltip = <Tooltip id="repeat">Repeat</Tooltip>;
     const resetTooltip = <Tooltip id="reset">Reset</Tooltip>;
-    const { clearQueue, createRandomQueue, pause, play, playing, repeat, toggleRepeat, stop } = this.props;
+    const { clearQueue, createRandomQueue, itemsEmpty, pause, play, playing, repeat, toggleRepeat, stop } = this.props;
     const repeatClass = repeat ? '' : 'faded';
 
     return (
       <div className="queueMenu">
         <ButtonGroup>
-          { playing ? 
+          {playing ? 
             <Button onClick={pause}><Glyphicon glyph="pause" /></Button> :
-            <Button onClick={play}><Glyphicon glyph="play" /></Button> }
+            <Button onClick={play} disabled={itemsEmpty}><Glyphicon glyph="play" /></Button> }
           <Button onClick={stop}><Glyphicon className={playing ? '': 'faded'} glyph="stop" /></Button>
           <OverlayTrigger placement="bottom" overlay={repeatTooltip}>
             <Button onClick={toggleRepeat}><Glyphicon className={repeatClass} glyph="retweet" /></Button>
@@ -43,6 +43,7 @@ class QueueMenu extends Component {
 QueueMenu.propTypes = {
   clearQueue: PropTypes.func.isRequired,
   createRandomQueue: PropTypes.func.isRequired,
+  itemsEmpty: PropTypes.bool.isRequired,
   pause: PropTypes.func.isRequired,
   play: PropTypes.func.isRequired,
   playing: PropTypes.bool.isRequired,

@@ -1,4 +1,38 @@
 .library {
-  max-height: 90vh;
+  max-height: 80vh;
   overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.library.panel-default {
+  background-color: #909483;
+}
+
+.library.panel {
+  border: 1px solid #747669;
+
+}
+
+.library .panel-body {
+  padding: 0;
+}
+
+/*.personCol:first-child {
+  border-top: 1px solid rgba(0, 0, 0, .05);
+}*/
+
+.personCol {
+  border-bottom: 1px solid #747669;
+}
+
+.personCol:last-child {
+  border-bottom: none;
+}
+
+.personCol .list-group {
+  margin: 10px auto;
+}
+
+.personCol:hover {
+  background-color: #A6AA9B;
 }

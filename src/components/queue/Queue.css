@@ -1,6 +1,6 @@
 .rtl {
   direction: rtl;
-  max-height: 90vh;
+  max-height: 80vh;
   overflow-y: auto;
 }
 
@@ -10,8 +10,30 @@
   min-height: 400px;
 }
 
+.queue.panel {
+  border: 1px solid #747669;
+}
+
+.queue.panel-default {
+  background-color: #909483;
+  margin-bottom: 0;
+  
+}
+
+.queue .list-group button {
+  background-color: #D2D6CB;
+  letter-spacing: .5px;
+  line-height: 1.5;
+  font-size: 1.1em;
+}
+
+.queue .list-group button:hover {
+  background-color: #F3F7EF;
+}
+
 .noQueueItem {
-  border: 1px dashed gray;
+  border: 1px dashed 747669;
+  background-color: #D2D6CB;
   text-align: center;
   margin: 40px 10px 20px;
   line-height: 200px;

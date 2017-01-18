@@ -127,11 +127,13 @@ class Queue extends Component {
   render() {
     const { items, playing, repeat, current } = this.state;
     const { canDrop, isOver, connectDropTarget, name } = this.props;
+    const panalClass = playing ? 'queue queuePlaying' : 'queue';
     
     return connectDropTarget(
       <div className="rtl">
-        <Panel className="queue"> 
+        <Panel className={panalClass}> 
         <QueueMenu 
+          itemsEmpty={items.length > 0 ? false: true}
           play={this.play}
           playing={playing}
           pause={this.pause}
@@ -152,7 +154,7 @@ class Queue extends Component {
             ): null;
           })}
           </ListGroup>
-          {items.length == 0 ? <Well className="noQueueItem">Drag Clips Here</Well> : null}
+          {items.length == 0 ? <Well className="noQueueItem">Drop Clips Here</Well> : null}
         </Panel>
       </div>
       );
