@@ -60,6 +60,10 @@ QueueItem.propTypes = {
 };
 
 const qItemSource = {
+
+	canDrag(props) {
+		return !props.playing;
+	},
  
 	beginDrag(props) {		
 		return {			

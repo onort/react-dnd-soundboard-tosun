@@ -10,18 +10,20 @@ const Library = (props) => {
   const { name, persons } = props;
   // TODO: Remove LibraryMenu component
   return (
-    <Panel className="library">
-    <Row>
-      { persons.map(person => {
-        return (
-          <Col xs={12} key={person.id} className="personCol">
-            <Person key={person.id} person={person} name={name} />
-          </Col>
-        );
-      })
-    }
-    </Row>
-    </Panel>
+    <div className="libraryScroll">
+      <Panel className="library">
+      <Row>
+        { persons.map(person => {
+          return (
+            <Col xs={12} key={person.id} className="personCol">
+              <Person key={person.id} person={person} name={name} />
+            </Col>
+          );
+        })
+      }
+      </Row>
+      </Panel>
+    </div>
   );
 };
 

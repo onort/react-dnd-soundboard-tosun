@@ -9,7 +9,8 @@
 }
 
 .personName {
+  font-family: 'Roboto Slab', serif;
+  font-weight: 700;
   font-size: 1.25em;
-  color: #201C1B;
-  letter-spacing: 1px;
+  letter-spacing: .5px;
 }

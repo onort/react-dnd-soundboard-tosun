@@ -1,7 +1,8 @@
-.library {
+.libraryScroll {
   max-height: 80vh;
   overflow-y: auto;
   overflow-x: hidden;
+
 }
 
 .library.panel-default {
@@ -10,6 +11,7 @@
 
 .library.panel {
   border: 1px solid #747669;
+  margin-bottom: 0;
 
 }
 
