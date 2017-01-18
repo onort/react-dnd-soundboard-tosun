@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 
 import Library from './components/library/Library';
+import PortraitModeWarning from './components/common/PortraitModeWarning';
 import Queue from './components/queue/Queue';
 import SiteHeader from './components/common/SiteHeader';
 import SiteFooter from './components/common/SiteFooter';
@@ -40,6 +41,7 @@ class App extends Component {
           </Row>
         </Grid>
         <SiteFooter />
+        <PortraitModeWarning />
       </div>
     );
   }

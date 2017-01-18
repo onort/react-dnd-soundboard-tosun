@@ -13,6 +13,7 @@ scroll-bar: #4A4942
 body {
   background-color: #876D6A;
   color: #555;
+  min-width: 566px;
 }
 
 h1, h2, h3 {

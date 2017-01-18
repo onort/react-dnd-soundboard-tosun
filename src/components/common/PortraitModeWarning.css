@@ -1,0 +1,39 @@
+#portraitWarning {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: none;
+}
+
+#portraitWarning .warningContainer {
+  height: 300px;
+  text-align: center;
+}
+
+#portraitWarning h3 {
+  width: 60vw;
+  color: #F3F7EF;
+  font-size: 2em;
+}
+
+#portraitWarning img {
+  display: block;
+  margin: auto;
+}
+
+@media (max-width: 566px) {
+  #portraitWarning {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, .8);
+  }
+}
+
+/*https://www.iconfinder.com/icons/830056/device_gesture_handheld_landscape_mobile_smartphone_touchscreen_icon#size=128*/
+
+
+

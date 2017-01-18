@@ -6,7 +6,7 @@ const SiteHeader = (props) => {
 
   return (
     <div className="siteHeaderDiv">
-      <img src="/images/fes.png" />
+      <img src="/images/fes-80.png" />
       <h3>{title}</h3>
     </div>
   );
