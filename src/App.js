@@ -40,7 +40,6 @@ class App extends Component {
             </Col>
           </Row>
         </Grid>
-        <SiteFooter />
         <PortraitModeWarning />
       </div>
     );

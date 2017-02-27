@@ -154,7 +154,7 @@ class Queue extends Component {
             ): null;
           })}
           </ListGroup>
-          {items.length == 0 ? <Well className="noQueueItem">Drop Clips Here</Well> : null}
+          {items.length == 0 ? <Well className="noQueueItem">Drag and Drop Clips Here</Well> : null}
         </Panel>
       </div>
       );

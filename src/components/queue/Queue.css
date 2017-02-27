@@ -7,7 +7,7 @@
 .queue {
   direction: ltr;
   width: 100%;
-  min-height: 400px;
+  min-height: 80vh;
 }
 
 .queue.panel {
@@ -36,6 +36,8 @@
   background-color: #D2D6CB;
   text-align: center;
   margin: 40px 10px 20px;
-  line-height: 200px;
   font-size: 1.2em;
+  color: #909483;
+  font-style: italic;
+  letter-spacing: 1px;
 }

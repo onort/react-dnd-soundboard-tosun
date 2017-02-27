@@ -13,7 +13,9 @@ scroll-bar/headers: #4A4942
 body {
   background-color: #876D6A;
   color: #4A4942;
-  min-width: 566px;
+  min-width: 100vw;
+  min-height: 100vh;
+  position: relative;
 }
 
 h1, h2, h3 {
@@ -28,6 +30,10 @@ button:focus, .btn:focus {
 
 .btn-default {
   color: #4A4942;
+}
+
+.panel {
+  min-width: 250px;
 }
 
 /*https://css-tricks.com/almanac/properties/s/scrollbar/*/

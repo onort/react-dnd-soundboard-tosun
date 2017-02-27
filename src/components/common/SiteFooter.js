@@ -1,3 +1,4 @@
+// Unused Component
 import React, { PropTypes } from 'react';
 import './SiteFooter.css';
 
